@@ -14,7 +14,7 @@ const orderSchema = new mongoose.Schema({
         }
     },
     service: { type: String, required: true, trim: true },
-    product: { type: String, required: true, trim: true },
+    product: { type: String, required: false, trim: true },
     price: { type: Number, required: true, trim: true },
     paymentMethod: {
         type: String,
