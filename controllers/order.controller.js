@@ -1,8 +1,7 @@
 const express = require('express');
 const { createOrder, getOrders, getOrder, deleteOrder, deleteOrders } = require('../services/order.service');
-const { checkApiKey, checkAdminRole } = require('../middlewares/auth.handler');
+const { checkAdminRole } = require('../middlewares/auth.handler');
 const passport = require('passport');
-const { session } = require('passport');
 
 const router = express.Router();
 

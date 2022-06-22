@@ -9,7 +9,6 @@
   },
   "keywords": [],
   "author": "David Diaz",
-  "type": "commonjs",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.13"

@@ -5,12 +5,7 @@ const orderController = require('../api-hairroom/controllers/order.controller')
 const userController = require('../api-hairroom/controllers/user.controller')
 const cors = require('cors');
 const app = express();
-const { checkApiKey, checkAdminRole, checkRoles } = require('./middlewares/auth.handler');
-const passport = require('passport');
-const { session } = require('passport');
-const port = process.env.PORT; 
-
-
+const { config } = require('./config/index');
 
 //Middleware
 app.use(express.json());
@@ -25,8 +20,8 @@ app.get('/', (req, res) => {
 })
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(config.dbUrl)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.log(err));
 
-app.listen(port, () => console.log('Server is running on port: ', port));
+app.listen(config.port, () => console.log('Server is running on port: ', config.port));
