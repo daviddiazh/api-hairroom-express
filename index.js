@@ -1,14 +1,23 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
-const orderRoutes = require('./routes/order.routes');
+const orderController = require('../api-hairroom/controllers/order.controller')
+const userController = require('../api-hairroom/controllers/user.controller')
 const cors = require('cors');
 const app = express();
+const { checkApiKey, checkAdminRole, checkRoles } = require('./middlewares/auth.handler');
+const passport = require('passport');
+const { session } = require('passport');
+const port = process.env.PORT; 
+
+
 
 //Middleware
 app.use(express.json());
 app.use(cors());
-app.use('/api', orderRoutes);
+require('./utils/auth/index');
+app.use('/api', orderController);
+app.use('/api/auth', userController);
 
 // Routes
 app.get('/', (req, res) => {

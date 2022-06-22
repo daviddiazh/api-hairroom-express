@@ -23,7 +23,6 @@ const orderSchema = new mongoose.Schema({
             message: '{VALUE} no es un metodo de pago permitido',
         }
     },
-    //createdAt: { type: Number },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Order', orderSchema);

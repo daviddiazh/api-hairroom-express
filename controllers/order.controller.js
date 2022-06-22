@@ -1,41 +1,35 @@
-const orderModel = require('../models/Order');
+const express = require('express');
+const { createOrder, getOrders, getOrder, deleteOrder, deleteOrders } = require('../services/order.service');
+const { checkApiKey, checkAdminRole } = require('../middlewares/auth.handler');
+const passport = require('passport');
+const { session } = require('passport');
 
-const createOrder = async (req, res) => {
-    const newOrder = new orderModel(req.body);
-    const savedOrder = await newOrder.save();
-    res.json(savedOrder);
-}
+const router = express.Router();
 
-const getOrders = async (req, res) => {
-    try {
-        const orders = await orderModel.find();
-        return res.json(orders);
-    } catch (error) {
-        return res.json(error);
-    }
-}
+router.post('/createOrder', createOrder);
 
-const getOrder = async (req, res) => {
-    const orderById = await orderModel.findById(req.params.id);
-    if(!orderById) return res.status(204).json();
-    return res.json(orderById);
-}
+router.get('/getOrders', 
+    passport.authenticate('jwt', { session: false }),
+    checkAdminRole,
+    getOrders
+);
 
-const deleteOrder = async (req, res) => {
-    const deleteAll = await orderModel.findByIdAndDelete(req.params.id);
-    if(!deleteAll) return res.status(204).json();
-    return res.json(deleteAll);
-}
+router.get('/getOrder/:id', 
+    passport.authenticate('jwt', { session: false }),
+    checkAdminRole,
+    getOrder
+);
 
-const deleteOrders = async (req, res) => {
-    const deleteAll = await orderModel.deleteMany();
-    return res.json(deleteAll);
-}
+router.delete('/deleteOrder/:id', 
+    passport.authenticate('jwt', { session: false }),
+    checkAdminRole,
+    deleteOrder
+);
 
-module.exports = {
-    createOrder,
-    getOrders,
-    getOrder,
-    deleteOrder,
+router.delete('/deleteAllOrders', 
+    passport.authenticate('jwt', { session: false }),
+    checkAdminRole,
     deleteOrders
-}
+);
+
+module.exports = router;
