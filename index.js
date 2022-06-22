@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 //const orderController = require('../api-hairroom/controllers/order.controller')
-const userController = require('../api-hairroom/controllers/user.controller')
+//const userController = require('../api-hairroom/controllers/user.controller')
 const cors = require('cors');
 const app = express();
 const { config } = require('./config/index');
@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 require('./utils/auth/index');
 //app.use('/api', orderController);
-app.use('/api/auth', userController);
+//app.use('/api/auth', userController);
 
 // Routes
 app.get('/', (req, res) => {
