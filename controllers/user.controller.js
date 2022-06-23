@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const validatorHandler = require('../middlewares/validator.handler');
 const userService = require('../services/user.service');
 const userModel = require('../models/User');
+const validarJWTUser = require('../middlewares/validator-jwt')
 
 const { config } = require('./../config/index');
 const router = express.Router();
@@ -39,6 +40,8 @@ router.post('/login',
         }
     }
 );
+
+router.get('/validate-token', validarJWTUser)
 
 
 module.exports = router;
