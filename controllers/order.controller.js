@@ -8,8 +8,8 @@ const router = express.Router();
 router.post('/createOrder', createOrder);
 
 router.get('/getOrders', 
-    passport.authenticate('jwt', { session: false }),
-    checkAdminRole,
+    //passport.authenticate('jwt', { session: false }),
+    //checkAdminRole,
     getOrders
 );
 
