@@ -9,7 +9,7 @@ const createOrder = async (req, res) => {
 const getOrders = async (req, res) => {
     try {
         const orders = await orderModel.find();
-        return res.json(orders);
+        return res.json(orders.reverse());
     } catch (error) {
         return res.json(error);
     }
